@@ -1,0 +1,22 @@
+{
+  "name": "better-jobs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telestrial/better-jobs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/telestrial/better-jobs/issues"
+  },
+  "homepage": "https://github.com/telestrial/better-jobs#readme",
+  "dependencies": {
+    "chrome-types": "^0.1.285"
+  }
+}
