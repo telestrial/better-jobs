@@ -11,7 +11,7 @@ import findLinkedInJobID from './helpers/findLinkedInJobID';
 const jobsOuterContainer = document.querySelector(OUTER_CONTAINER_SELECTOR);
 
 // Initialize the object we'll use to keep track of the company names
-const companies: { [key: string]: Element } = {};
+const companies: { [key: string]: { company: string; element: Element } } = {};
 
 if (jobsOuterContainer) {
   // Use the mutation observer to catch added jobs:
@@ -46,8 +46,11 @@ if (jobsOuterContainer) {
 
         const keyName = company.innerText + jobID;
 
-        if (company.innerText !== null && !companies[keyName]) {
-          companies[keyName] = currentElement;
+        if (company.innerText !== null && !companies[jobID]) {
+          companies[jobID] = {
+            company: company.innerText,
+            element: currentElement,
+          };
         }
         console.log(companies);
       }
