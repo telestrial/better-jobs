@@ -44,8 +44,6 @@ if (jobsOuterContainer) {
 
         const jobID = findLinkedInJobID(linkString);
 
-        const keyName = company.innerText + jobID;
-
         if (company.innerText !== null && !companies[jobID]) {
           companies[jobID] = {
             company: company.innerText,
