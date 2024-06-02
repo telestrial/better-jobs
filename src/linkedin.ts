@@ -50,7 +50,6 @@ if (jobsOuterContainer) {
             element: currentElement,
           };
         }
-        console.log(companies);
       }
     }
   };
