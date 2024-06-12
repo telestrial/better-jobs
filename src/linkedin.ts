@@ -1,14 +1,14 @@
 import {
-  OUTER_CONTAINER_SELECTOR,
-  INNER_CONTAINER_SELECTOR,
-  JOB_SELECTOR,
-  LINK_SELECTOR,
+  LI_OUTER_CONTAINER_SELECTOR,
+  LI_INNER_CONTAINER_SELECTOR,
+  LI_JOB_SELECTOR,
+  LI_LINK_SELECTOR,
 } from './constants';
 
 import findLinkedInJobID from './helpers/findLinkedInJobID';
 
 // Select job postings (runs on /search and /collections)
-const jobsOuterContainer = document.querySelector(OUTER_CONTAINER_SELECTOR);
+const jobsOuterContainer = document.querySelector(LI_OUTER_CONTAINER_SELECTOR);
 
 // Initialize the object we'll use to keep track of the company names
 const companies: { [key: string]: { company: string; element: Element } } = {};
@@ -27,14 +27,14 @@ if (jobsOuterContainer) {
 
         const currentElement = mutation.target as Element;
 
-        if (!currentElement.classList.contains(INNER_CONTAINER_SELECTOR))
+        if (!currentElement.classList.contains(LI_INNER_CONTAINER_SELECTOR))
           continue;
 
         const company = currentElement.querySelector(
-          JOB_SELECTOR
+          LI_JOB_SELECTOR
         ) as HTMLElement;
 
-        const jobLink = currentElement.querySelector(LINK_SELECTOR);
+        const jobLink = currentElement.querySelector(LI_LINK_SELECTOR);
 
         if (!company || !jobLink) continue;
 
