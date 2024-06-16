@@ -81,7 +81,6 @@ if (jobsOuterContainer) {
   observer.observe(jobsOuterContainer, config);
 
   // Add a counter at the top of the job list.
-
   betterJobsBanner.innerText = `BetterJobs has hidden 0 posts.`;
   betterJobsBanner.setAttribute(
     'style',
