@@ -13,6 +13,16 @@ const jobsOuterContainer = document.querySelector(LI_OUTER_CONTAINER_SELECTOR);
 // Initialize the object we'll use to keep track of the company names
 const companies: { [key: string]: { company: string; element: Element } } = {};
 
+let removedJobs: string[] = [];
+const betterJobsBanner = document.createElement('div');
+
+function incrementHiddenJobs(jobID: string) {
+  if (!removedJobs.includes(jobID)) {
+    removedJobs.push(jobID);
+  }
+  betterJobsBanner.innerText = `BetterJobs has hidden ${removedJobs.length} posts.`;
+}
+
 if (jobsOuterContainer) {
   // Use the mutation observer to catch added jobs:
 
@@ -43,12 +53,22 @@ if (jobsOuterContainer) {
         if (!linkString) continue;
 
         const jobID = findLinkedInJobID(linkString);
+        const companyName = company.innerText.trim();
 
-        if (company.innerText !== null && !companies[jobID]) {
+        if (companyName !== null && !companies[jobID]) {
           companies[jobID] = {
-            company: company.innerText,
+            company: companyName,
             element: currentElement,
           };
+        }
+
+        // Destroy.
+        if (
+          companyName == 'HireMeFast LLC' ||
+          companyName == 'Patterned Learning Career'
+        ) {
+          currentElement.remove();
+          incrementHiddenJobs(jobID);
         }
       }
     }
@@ -59,4 +79,13 @@ if (jobsOuterContainer) {
 
   // Start observing the target node for configured mutations
   observer.observe(jobsOuterContainer, config);
+
+  // Add a counter at the top of the job list.
+
+  betterJobsBanner.innerText = `BetterJobs has hidden 0 posts.`;
+  betterJobsBanner.setAttribute(
+    'style',
+    'width: 100%; text-align: center; padding: 1rem; background-color: #74e5c0; color: black;'
+  );
+  jobsOuterContainer.prepend(betterJobsBanner);
 }
