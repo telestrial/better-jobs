@@ -5,6 +5,8 @@ import {
   LI_LINK_SELECTOR,
 } from './constants';
 
+import { blockedJobs } from './linkedin_store';
+
 import findLinkedInJobID from './helpers/findLinkedInJobID';
 
 // Select job postings (runs on /search and /collections)
@@ -50,12 +52,7 @@ const callback: MutationCallback = (mutationList, observer) => {
       const companyName = company.innerText.trim();
 
       // Destroy.
-      if (
-        companyName === 'HireMeFast LLC' ||
-        companyName === 'Patterned Learning Career' ||
-        companyName === 'Trimble Inc.' ||
-        companyName === 'Microsoft'
-      ) {
+      if (blockedJobs.includes(companyName)) {
         currentElement.remove();
         incrementHiddenJobs(jobID);
       }
